@@ -29,14 +29,16 @@ public class StringCalculator {
 				if (isNegative) {
 					negativeNums.add(m1.group());
 				} else {
-					positiveNums.add(Integer.parseInt(m1.group()));
+					if(!(Integer.parseInt(m1.group()) > 1000)) {
+						positiveNums.add(Integer.parseInt(m1.group()));	
+					}
 				}
 			}
 
 			for (Integer n : positiveNums) {
 				total = total + n;
 			}
-			System.out.println("Total Positive numbers in input : " + positiveNums);
+			System.out.println("Positive numbers in input : " + positiveNums);
 			if (negativeNums.size() > 0) {
 				throw new Exception();
 			}
