@@ -7,38 +7,32 @@ import java.util.regex.Pattern;
 public class StringCalculator {
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Input : ");
-		String str = sc.nextLine();
+		String str = scanner.nextLine();
 		StringCalculator noaman = new StringCalculator();
 		int ans = noaman.add(str);
 		System.out.println("Total of Positive Numbers : " + ans);
 	}
 
 	public int add(String number) {
-		int total = 0;
-		List<String> negativeNums = new ArrayList<String>();
+		List<String> negativeNums = new ArrayList<>();
+		List<Integer> positiveNums = new ArrayList<>();
+		int total =0;
 		try {
-
 			Pattern p = Pattern.compile("(-?[0-9]+)");
 			Matcher m1 = p.matcher(number);
-			ArrayList<Integer> positiveNums = new ArrayList<Integer>();
-
 			while (m1.find()) {
 				boolean isNegative = checknegative(m1.group());
 				if (isNegative) {
 					negativeNums.add(m1.group());
 				} else {
 					if(!(Integer.parseInt(m1.group()) > 1000)) {
-						positiveNums.add(Integer.parseInt(m1.group()));	
+						total = total + Integer.parseInt(m1.group());
+						positiveNums.add(Integer.parseInt(m1.group()));
 					}
 				}
 			}
-
-			for (Integer n : positiveNums) {
-				total = total + n;
-			}
-			System.out.println("Positive numbers in input : " + positiveNums);
 			if (negativeNums.size() > 0) {
 				throw new Exception();
 			}
@@ -46,6 +40,7 @@ public class StringCalculator {
 			System.out.println(
 					"Negative Numbers are not allowed. You have input below negative number : \n" + negativeNums);
 		}
+		System.out.println("Positive number in input : \n " + positiveNums);
 		return total;
 	}
 
