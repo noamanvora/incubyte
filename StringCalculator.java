@@ -14,17 +14,21 @@ public class StringCalculator {
 	public int add(String number)
 	{
 		int total=0;
-		if(number.isEmpty())
-		{
-			return 0;
-		}
-		else
-		{
-			String[] arrnumber = number.split(",");
-			for(String array : arrnumber)
-			{
-				total=total+ Integer.parseInt(array);	
+		try {
+
+			Pattern p = Pattern.compile("(-?[0-9]+)");
+			Matcher m1 = p.matcher(number);
+			ArrayList<Integer> list = new ArrayList<Integer>();
+
+			while (m1.find()) {
+					list.add(Integer.parseInt(m1.group()));
 			}
+			
+			for (Integer n : list) {
+				total = total + n;
+			}
+		} catch (NegativeNumberException n) {
+			System.out.println(n);
 		}
 		return total;
 	}
